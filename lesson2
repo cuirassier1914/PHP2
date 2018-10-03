@@ -1,7 +1,4 @@
 <?php
-
-//Реализация с абстрактным классом
-
 abstract class item 
 {
 	public $id;
@@ -22,16 +19,21 @@ class pieceItem extends item
 {	
     protected $unit = 'pcs.';
     public function getFinalPrice($quantity) {
-        echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $quantity*$this -> unitPrice . ' euro<br>';
-        return $quantity*$this -> unitPrice;
+        $finalPrice=$quantity*$this -> unitPrice;
+        $revenue=$finalPrice-($finalPrice/100)*18;
+        
+        echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $finalPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
+        return [$finalPrice, $revenue];
     }
 }
 
 class digitalItem extends item
 {
     public function getFinalPrice($quantity) {
-        echo 'Final price for' . $this -> name . ' is ' . $this -> unitPrice . ' euro<br>';
-        return $this -> unitPrice;
+        $finalPrice=$this -> unitPrice;
+        $revenue=$finalPrice-($finalPrice/100)*18;
+        echo 'Final price for' . $this -> name . ' is ' . $this -> unitPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
+        return [$finalPrice, $revenue];
     }
 }
 
