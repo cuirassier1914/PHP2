@@ -1,6 +1,10 @@
 <?php
+
+//Реализация с абстрактным классом
+
 abstract class item 
-{
+{	
+    const CHARGES = 0.82;
 	public $id;
     public $name;
     public $unitPrice;
@@ -13,6 +17,8 @@ abstract class item
     }
     
     abstract public function getFinalPrice($quantity);
+    abstract public function getRevenue($finalPrice);
+    abstract public function printData($quantity);
 }
 
 class pieceItem extends item
@@ -20,10 +26,15 @@ class pieceItem extends item
     protected $unit = 'pcs.';
     public function getFinalPrice($quantity) {
         $finalPrice=$quantity*$this -> unitPrice;
-        $revenue=$finalPrice-($finalPrice/100)*18;
-        
-        echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $finalPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
-        return [$finalPrice, $revenue];
+        return $finalPrice;
+    }
+    public function getRevenue($finalPrice) {
+        return $finalPrice*self::CHARGES;
+    }
+    public function printData($quantity) {
+        $finalPrice = $this -> getFinalPrice($quantity);
+        $revenue = $this -> getRevenue($finalPrice);
+    	echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $finalPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
     }
 }
 
@@ -31,9 +42,15 @@ class digitalItem extends item
 {
     public function getFinalPrice($quantity) {
         $finalPrice=$this -> unitPrice;
-        $revenue=$finalPrice-($finalPrice/100)*18;
-        echo 'Final price for' . $this -> name . ' is ' . $this -> unitPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
-        return [$finalPrice, $revenue];
+        return $finalPrice;
+    }
+    public function getRevenue($finalPrice) {
+        return $finalPrice*self::CHARGES;
+    }
+    public function printData($quantity) {
+        $finalPrice = $this -> getFinalPrice($quantity);
+        $revenue = $this -> getRevenue($finalPrice);
+    	echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $finalPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
     }
 }
 
@@ -43,12 +60,60 @@ class itemByTheWeight extends pieceItem
 }
 
 $item1 = new pieceItem(1, 'item1', 33);
-$item1 -> getFinalPrice(2);
+$item1 -> printData(3);
 
-$item2 = new digitalItem(2, 'item2', 15);
-$item2 -> getFinalPrice(1);
 
-$item3 = new itemByTheWeight(2, 'item3', 5);
-$item3 -> getFinalPrice(0.5);
+
+
+
+//Реализация без абстрактного класса
+
+class item 
+{	
+    const CHARGES = 0.82;
+	public $id;
+    public $name;
+    public $unitPrice;
+    protected $unit;
     
+    public function __construct($id, $name, $unitPrice) {
+    	$this -> id = $id;
+        $this -> name = $name;
+        $this -> unitPrice = $unitPrice;
+    }
+    
+    public function getFinalPrice($quantity) {
+        $finalPrice=$quantity*$this -> unitPrice;
+        return $finalPrice;
+    }
+    public function getRevenue($finalPrice) {
+        return $finalPrice*self::CHARGES;
+    }
+    public function printData($quantity) {
+        $finalPrice = $this -> getFinalPrice($quantity);
+        $revenue = $this -> getRevenue($finalPrice);
+    	echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $finalPrice . ' euro<br>Revenue is ' . $revenue .'<br>';
+    }
+}
+
+class pieceItem extends item
+{	
+    protected $unit = 'pcs.';
+}
+
+class digitalItem extends item
+{
+    public function getFinalPrice($quantity) {
+        $finalPrice=$this -> unitPrice;
+        return $finalPrice;
+    }
+}
+
+class itemByTheWeight extends pieceItem
+{
+	protected $unit = 'kg.';
+}
+
+$item1 = new pieceItem(1, 'item1', 33);
+$item1 -> printData(3);
 ?>
