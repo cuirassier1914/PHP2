@@ -33,10 +33,6 @@ class digitalItem extends item
         echo 'Final price for' . $this -> name . ' is ' . $this -> unitPrice . ' euro<br>';
         return $this -> unitPrice;
     }
-    public function getRevenue() {
-        $revenue = $this -> getFinalPrice($quantity) - 10;
-        echo 'revenue is ' . $revenue;
-    }
 }
 
 class itemByTheWeight extends pieceItem
