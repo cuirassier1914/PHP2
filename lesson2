@@ -1,0 +1,52 @@
+<?php
+
+//Реализация с абстрактным классом
+
+abstract class itemTemplate 
+{
+	public $id;
+    public $name;
+    public $unitPrice;
+    protected $unit;
+    
+    abstract public function getFinalPrice($quantity);
+    //abstract protected function getRevenue();
+}
+
+class item extends itemTemplate
+{
+	public function __construct($id, $name, $unitPrice) {
+    	$this -> id = $id;
+        $this -> name = $name;
+        $this -> unitPrice = $unitPrice;
+    }
+    public function getFinalPrice($quantity) {
+        echo 'Final price for ' . $quantity . ' ' . $this -> unit . ' of ' . $this -> name .  ' is ' . $quantity*$this -> unitPrice . ' euro<br>';
+        return $quantity*$this -> unitPrice;
+    }
+}
+
+class pieceItem extends item
+{	
+    protected $unit = 'pcs.';
+}
+
+class digitalItem extends item
+{
+    //protected $unit = 'ex.';
+    public function getFinalPrice($quantity) {
+        echo 'Final price for' . $this -> name . ' is ' . $this -> unitPrice . ' euro<br>';
+        return $this -> unitPrice;
+    }
+}
+
+//class itemByTheWeight extends 
+
+$item1 = new pieceItem(1, 'item1', 33);
+$item1 -> getFinalPrice(2);
+
+$item2 = new digitalItem(2, 'item2', 15);
+$item2 -> getFinalPrice(1);
+
+    
+?>
