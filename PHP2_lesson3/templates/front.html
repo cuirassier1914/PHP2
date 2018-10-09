@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallary</title>
+   <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+{% for item in list %}
+    <div class="prew">
+        <a href="/?controller=foto.html&src={{item.src}}&name={{item.name}}">
+        <img class="prewImg" src="{{item.src}}">
+        </a>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>
