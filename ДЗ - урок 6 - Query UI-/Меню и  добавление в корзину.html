@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SHOP-CART</title>
+    <link type="text/css" href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+    <style type="text/css">
+        .accordion {
+            width: 500px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .item {
+            width: 100px;
+            border: 2px solid;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .drag {
+            font-weight: 700;
+            color: chocolate;
+        }
+
+        .discription {
+            font-size: 15px;
+        }
+
+
+        p {
+            margin: 0;
+        }
+
+        .cart {
+            width: 150px;
+            background-color: chocolate;
+            padding: 10px;
+            border-radius: 20px;
+            color: aliceblue;
+            transition-duration: 1s;
+        }
+
+        .cart h3 {
+            text-align: center;
+            font-weight: 400;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <div class="accordion">
+                <h3 class="category">Категория 1</h3>
+                <div class="category_content">
+                    <div class="item">
+                        <p class="drag">Товар 1</p>
+                        <p>$<span class="price">100</span></p>
+                    </div>
+                    <div class="item">
+                        <p class="drag">Товар 2</p>
+                        <p>$<span class="price">200</span></p>
+                    </div>
+                    <div class="item">
+                        <p class="drag">Товар 3</p>
+                        <p>$<span class="price">300</span></p>
+                    </div>
+                </div>
+                <h3 class="category">Категория 2</h3>
+                <div class="category_content">
+                    <div class="item">
+                        <p class="drag">Товар 1</p>
+                        <p>$<span class="price">100</span></p>
+                    </div>
+                    <div class="item">
+                        <p class="drag">Товар 2</p>
+                        <p>$<span class="price">200</span></p>
+                    </div>
+                    <div class="item">
+                        <p class="drag">Товар 3</p>
+                        <p>$<span class="price">300</span></p>
+                    </div>
+                </div>
+                <h3 class="category">Категория 3</h3>
+                <div class="category_content">
+                    <div class="item">
+                        <p class="drag">Товар 1</p>
+                        <p>$<span class="price">100</span></p>
+                    </div>
+                    <div class="item">
+                        <p class="drag">Товар 2</p>
+                        <p>$<span class="price">200</span></p>
+                    </div>
+                    <div class="item">
+                        <p class="drag">Товар 3</p>
+                        <p>$<span class="price">300</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart">
+            <h3>Корзина</h3>
+            <p class="quantity">Количество товаров:<span class='number'> 0 </span></p>
+            <p class="value">На сумму: <span class='total'>0</span> $</p>
+        </div>
+    </div>
+    <script src="jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
